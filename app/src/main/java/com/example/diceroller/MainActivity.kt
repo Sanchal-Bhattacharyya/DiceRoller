@@ -1,12 +1,11 @@
 package com.example.diceroller
 
-import android.app.ProgressDialog.show
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,19 +38,30 @@ class MainActivity : AppCompatActivity() {
 
     //Second Dice has eight sides
     private fun rollSecondDice():Int {
-        val secondDice = Dice(8);
-        val secondDiceRoll = secondDice.roll();
-        val resultTextView:TextView = findViewById<TextView>(R.id.textView2);
-        resultTextView.text = secondDiceRoll.toString();
+        val secondDice = Dice();
+        val secondDiceRoll:Int = secondDice.roll();
+        val secondDiceImage:ImageView = findViewById<ImageView>(R.id.imageView2);
+        assignDiceImage(secondDiceRoll, secondDiceImage);
         return secondDiceRoll;
     }
 
     //First Dice has six sides
     private fun rollFirstDice():Int {
         val firstDice = Dice();
-        val firstDiceRoll = firstDice.roll();
-        val resultTextView:TextView = findViewById<TextView>(R.id.textView);
-        resultTextView.text = firstDiceRoll.toString();
+        val firstDiceRoll:Int = firstDice.roll();
+        val firstDiceImage:ImageView = findViewById<ImageView>(R.id.imageView);
+        assignDiceImage(firstDiceRoll, firstDiceImage);
         return firstDiceRoll;
+    }
+
+    private fun assignDiceImage(diceRoll:Int, diceImage:ImageView) {
+        when(diceRoll) {
+            1 -> diceImage.setImageResource(R.drawable.dice_1);
+            2 -> diceImage.setImageResource(R.drawable.dice_2);
+            3 -> diceImage.setImageResource(R.drawable.dice_3);
+            4 -> diceImage.setImageResource(R.drawable.dice_4);
+            5 -> diceImage.setImageResource(R.drawable.dice_5);
+            6 -> diceImage.setImageResource(R.drawable.dice_6);
+        }
     }
 }
